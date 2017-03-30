@@ -5,11 +5,11 @@ class Board
 
   end
 
-  def self.random_grid
+  def self.random_board
     #TODO calls populate
   end
 
-  def initialize(grid = self.random_grid)
+  def initialize(grid = self.random_board)
     @grid = grid
   end
 
