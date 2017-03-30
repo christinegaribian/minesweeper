@@ -8,32 +8,39 @@ class Minesweeper
     @player = player
   end
 
-  def guess
-  end
-
-  def check_guess
-  end
-
-  def flag
-  end
-
-  def won?
-  end
-
   def run
+    play_turn until game_over?
   end
 
   def play_turn
+    @board.render
+
+    move = @player.get_move
+    pos = @player.get_pos
+
+    handle_turn(move, pos)
+  end
+
+  def handle_turn(move, pos)
+    if move == "f"
+      @board[pos].flag
+    else
+      @board[pos].reveal
+    end
   end
 
   def lost?
   end
 
+  def won?
+  end
+
   def game_over?
+    won? || lost?
   end
 
 end
 
-if __FILE__ = $PROGRAM_NAME
+if __FILE__ == $PROGRAM_NAME
   game = Minesweeper.new(Board.random_board, Player.new("C"))
 end
