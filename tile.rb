@@ -1,4 +1,5 @@
 class Tile
+  attr_reader :has_bomb, :visible, :has_flag
 
   def initialize(bomb = false)
     @visible = false
@@ -14,5 +15,4 @@ class Tile
   def flag
     @has_flag = !@has_flag
   end
-
 end

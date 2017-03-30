@@ -30,9 +30,11 @@ class Minesweeper
   end
 
   def lost?
+    @board.lost?
   end
 
   def won?
+    @board.won?
   end
 
   def game_over?
