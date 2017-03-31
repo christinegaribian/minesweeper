@@ -70,7 +70,27 @@ class Board
 
   end
 
-  def grab_fringe
+  def grab_fringe(pos)
+    x, y = pos
+    x_range = (x-1..x+1).to_a.select {|val| val.between?(0,8)}
+    y_range = (y-1..y+1).to_a.select {|val| val.between?(0,8)}
+
+    new_pos = []
+    x_range.each do |num1|
+      y_range.each do |num2|
+        new_pos << [num1, num2]
+      end
+    end
+
+    remove_bad_neighbors(new_pos)
+  end
+
+  def remove_bad_neighbors(pos_array)
+    neighbors = pos_array.reject do |pos|
+      tile = @board[pos]
+      tile.visible || tile.bomb
+    end
+    neighbors
   end
 
   def check_fringe
