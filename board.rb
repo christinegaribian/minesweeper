@@ -8,13 +8,22 @@ class Board
   def self.random_board
     #TODO calls populate
     new_board = Array.new(9) { Array.new(9) }
-    Board.new(new_board.populate)
+    Board.new(Board.populate(new_board))
   end
 
   def initialize(grid = self.random_board)
     @grid = grid
   end
 
+  def [](pos)
+    x, y = pos
+    @grid[x][y]
+  end
+
+  def []=(pos, value)
+    x, y = pos
+    @grid[x][y] = value
+  end
 
   def lost?
     @grid.any? do |row|
@@ -27,12 +36,12 @@ class Board
   def won?
     @grid.all? do |row|
       row.all? do |tile|
-        tile.revealed || tile.has_bomb
+        tile.visible || tile.has_bomb
       end
     end
   end
 
-  def populate
+  def self.populate(array)
     options = []
     (9 * 9 - NUM_BOMBS).times do
       options << Tile.new
@@ -44,16 +53,21 @@ class Board
 
     options.shuffle!
 
-    self.map! do |row|
+    array.map! do |row|
       row.map! do |tile|
         options.pop
       end
     end
 
-    self
+    array
   end
 
   def render
+    puts "    " + (0..8).to_a.join(" ")
+    @grid.each_with_index do |row, idx|
+      puts "#{idx} | #{row.map{ |x| x.value }.join(" ")}"
+    end
+
   end
 
   def grab_fringe

@@ -38,6 +38,7 @@ class Player
   end
 
   def valid_pos?(pos)
+    return false if pos.nil?
     pos.all? { |el| el.between?(0,8) }
   end
 

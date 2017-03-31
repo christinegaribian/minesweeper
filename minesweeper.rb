@@ -14,7 +14,7 @@ class Minesweeper
 
   def play_turn
     @board.render
-
+    #debugger
     move = @player.get_move
     pos = @player.get_pos
 
@@ -30,11 +30,21 @@ class Minesweeper
   end
 
   def lost?
-    @board.lost?
+    if @board.lost?
+      puts "You lost"
+      true
+    else
+      false
+    end
   end
 
   def won?
-    @board.won?
+    if @board.won?
+      puts "wooohooo"
+      true
+    else
+      false
+    end 
   end
 
   def game_over?
@@ -44,5 +54,7 @@ class Minesweeper
 end
 
 if __FILE__ == $PROGRAM_NAME
+  # debugger
   game = Minesweeper.new(Board.random_board, Player.new("C"))
+  game.run
 end

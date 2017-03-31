@@ -15,4 +15,14 @@ class Tile
   def flag
     @has_flag = !@has_flag
   end
+
+  def value
+    if has_flag
+      "f"
+    elsif !visible
+      " "
+    else
+      "1"
+    end
+  end
 end
